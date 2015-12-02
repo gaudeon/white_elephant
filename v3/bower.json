@@ -1,0 +1,22 @@
+{
+  "name": "white_elephant_v3",
+  "description": "White Elephant App v3",
+  "main": "server.js",
+  "authors": [
+    "Travis Chase <gaudeon@cpan.org>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gaudeon/white_elephant",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "~1.2.3"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "white_elephant_v3",
+  "version": "3.0.0",
+  "description": "White Elephant App v3",
+  "author": "Travis Chase <gaudeon@cpan.org>",
+  "main": "app.js",
+  "private": true,
+  "dependencies": {
+    "connect-livereload": "^0.5.4",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-express": "^0.3.5",
+    "gulp-install": "^0.6.0"
+  }
+}

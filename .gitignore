@@ -17,3 +17,10 @@ nytprof.out
 /pm_to_blib
 *.o
 *.bs
+node_modules/
+bower_components/
+test/
+tests/
+v3/app/components
+*.swp
+.*

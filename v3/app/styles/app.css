@@ -1,0 +1,7 @@
+body {
+    background-image: url("/images/white-elephant-light.png");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: 15em 15em;
+    padding: 1em;
+}
