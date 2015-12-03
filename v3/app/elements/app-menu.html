@@ -1,0 +1,51 @@
+<link rel="import" href="/components/polymer/polymer.html">
+
+<dom-module id="app-menu">
+
+  <template>
+    <style>
+        :host {
+            display: block;
+            border-top: solid rgba(0,0,0,.25) 1px;
+            border-bottom: solid rgba(0,0,0,.25) 1px;
+            width: 100%;
+            padding: .5em 0;
+            margin: auto;
+            text-align: center;
+        }
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #ff0000;
+            font-size: 1.25em;
+            width: 12em;
+        }
+        a:hover {
+            color: #000000;
+        }
+    </style>
+    <section>
+        <a href="#rules" on-click="menuItem" data-page="1">Rules</a>
+        <a href="#add-player" on-click="menuItem" data-page="2">Add Player</a>
+        <a href="#list-players" on-click="menuItem" data-page="3">List Players</a>
+        <a href="#play" on-click="menuItem" data-page="4">Play!</a>
+    </section>
+  </template>
+
+  <script>
+    // element registration
+    Polymer({
+        is: "app-menu",
+        menuItem: function(ev) {
+            ev.preventDefault();
+
+            var page = ev.target.getAttribute('data-page');
+
+            window.location.hash = ev.target.getAttribute('href');
+
+            this.fire('page', {page: page});
+        }
+    });
+  </script>
+
+</dom-module>

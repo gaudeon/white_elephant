@@ -1,7 +1,17 @@
+* {
+    font-family: Lato;
+    box-sizing: border-box;
+}
 body {
+    background-color: rgba(100,0,0,.75);
+    margin:0;
+    padding:0;
+    font-size: 16px;
+}
+
+body app-core {
     background-image: url("/images/white-elephant-light.png");
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: 90% 70vh;
     background-size: 15em 15em;
-    padding: 1em;
 }

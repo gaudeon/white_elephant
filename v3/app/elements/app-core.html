@@ -1,18 +1,72 @@
-<link rel="import" href="/components/polymer.html">
+<link rel="import" href="/components/polymer/polymer.html">
+<link rel="import" href="/components/iron-pages/iron-pages.html">
+<link rel="import" href="/elements/app-menu.html">
+<link rel="import" href="/elements/app-rules.html">
+<link rel="import" href="/elements/app-add-player.html">
+<link rel="import" href="/elements/app-list-players.html">
+<link rel="import" href="/elements/app-play.html">
 
 <dom-module id="app-core">
 
   <template>
     <style>
+        :host {
+            display: block;
+            width: 1024px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            height: 100vh;
+            top:0;
+            position:relative;
+            padding:.25em 1em 0 1em;
+        }
+        h1 {
+            text-align: center;
+        }
+        iron-pages {
+            padding: 0 1em;
+        }
     </style>
 
     <h1>White Elephant Exchange</h1>
+
+    <app-menu></app-menu>
+
+    <iron-pages selected="0">
+        <h2>Welcome to the White Elephant Gift Exchange App!</h2>
+        <app-rules></app-rules>
+        <app-add-player></app-add-player>
+        <app-list-players></app-list-players>
+        <app-play></app-play>
+    </iron-pages>
+
   </template>
 
   <script>
+    var routes = {
+        "#rules": 1,
+        "#add-player": 2,
+        "#list-players": 3,
+        "#play": 4
+    };
+
     // element registration
     Polymer({
-      is: "app-core"
+        is: "app-core",
+        ready: function() {
+            'use strict';
+
+            var pages = document.querySelector('iron-pages');
+
+            document.querySelector('app-menu').addEventListener('page', function(ev) {
+                pages.select(ev.detail.page);
+            });
+
+            var hash = window.location.hash;
+            if (typeof(hash) !== 'undefined' && typeof(routes[hash]) !== 'undefined') {
+                pages.select(routes[hash]);
+            }
+        }
     });
   </script>
 

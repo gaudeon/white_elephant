@@ -7,17 +7,7 @@ gulp.task('install', function() {
         .pipe(install());
 });
 
-gulp.task('copy-polymer', function() {
-    return gulp.src('./bower_components/polymer/polymer*.html')
-        .pipe(gulp.dest('./app/components'));
-});
-
-gulp.task('copy-webcomponents', function() {
-    return gulp.src('./bower_components/webcomponentsjs/webcomponents*.js')
-        .pipe(gulp.dest('./app/components'));
-});
-
-gulp.task('init', ['install', 'copy-polymer', 'copy-webcomponents']);
+gulp.task('init', ['install']);
 
 gulp.task('default', function() {
     // Start the server at the beginning of the task
