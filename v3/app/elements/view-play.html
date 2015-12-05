@@ -1,6 +1,6 @@
 <link rel="import" href="/components/polymer/polymer.html">
 
-<dom-module id="app-rules">
+<dom-module id="view-rules">
 
   <template>
     <style>
@@ -26,9 +26,11 @@
   </template>
 
   <script>
-    // element registration
-    Polymer({
-        is: "app-rules"
+    window.addEventListener('WebComponentsReady', function(e) {
+        // element registration
+        Polymer({
+            is: "view-rules"
+        });
     });
   </script>
 

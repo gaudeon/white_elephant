@@ -1,10 +1,9 @@
 <link rel="import" href="/components/polymer/polymer.html">
 <link rel="import" href="/components/iron-pages/iron-pages.html">
 <link rel="import" href="/elements/app-menu.html">
-<link rel="import" href="/elements/app-rules.html">
-<link rel="import" href="/elements/app-add-player.html">
-<link rel="import" href="/elements/app-list-players.html">
-<link rel="import" href="/elements/app-play.html">
+<link rel="import" href="/elements/view-rules.html">
+<link rel="import" href="/elements/view-players.html">
+<link rel="import" href="/elements/view-play.html">
 
 <dom-module id="app-core">
 
@@ -34,10 +33,9 @@
 
     <iron-pages selected="0">
         <h2>Welcome to the White Elephant Gift Exchange App!</h2>
-        <app-rules></app-rules>
-        <app-add-player></app-add-player>
-        <app-list-players></app-list-players>
-        <app-play></app-play>
+        <view-rules></view-rules>
+        <view-players></view-players>
+        <view-play></view-play>
     </iron-pages>
 
   </template>
@@ -45,9 +43,8 @@
   <script>
     var routes = {
         "#rules": 1,
-        "#add-player": 2,
-        "#list-players": 3,
-        "#play": 4
+        "#players": 2,
+        "#play": 3
     };
 
     // element registration

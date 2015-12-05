@@ -1,6 +1,6 @@
 <link rel="import" href="/components/polymer/polymer.html">
 
-<dom-module id="app-add-player">
+<dom-module id="view-players">
 
   <template>
     <style>
@@ -10,12 +10,21 @@
     </style>
 
     <h2>Add Player</h2>
+
+    <form>
+      <section>
+        <span>Player</span><input type="text">
+      </section>
+      <section>
+        <span>Present ID</span><input type="text">
+      </section>
+    </form>
   </template>
 
   <script>
     // element registration
     Polymer({
-        is: "app-add-player"
+        is: "view-players"
     });
   </script>
 
