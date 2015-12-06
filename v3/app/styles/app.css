@@ -15,3 +15,8 @@ body app-core {
     background-position: 90% 70vh;
     background-size: 15em 15em;
 }
+
+a {
+    color: #ff0000;
+    text-decoration: none;
+}

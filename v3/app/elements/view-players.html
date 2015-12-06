@@ -1,4 +1,7 @@
-<link rel="import" href="/components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-form/iron-form.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
 
 <dom-module id="view-players">
 
@@ -7,24 +10,96 @@
         :host {
             display: block;
         }
+        h2 {
+            display: inline-block;
+            margin-right: 2em;
+        }
+        .players-form {
+            margin-left: 2em;
+            width: 50%;
+        }
+        paper-input {
+          --paper-input-container-underline-disabled: {};
+        }
+        .buttons {
+          height: 2em;
+          text-align: right;
+        }
+        a {
+          display: inline-block;
+          margin-right: 1em;
+          vertical-align: middle;
+        }
     </style>
 
-    <h2>Add Player</h2>
+    <h2>Players</h2>
 
-    <form>
-      <section>
-        <span>Player</span><input type="text">
-      </section>
-      <section>
-        <span>Present ID</span><input type="text">
-      </section>
-    </form>
+    <a href="#players" on-click="toggleForm">[ Add ]</a>
+    <section class="players-form" style="display: none">
+      <form is="iron-form" id="form" method="post" action="/players">
+        <paper-input name="player" required="true" label="Player"></paper-input>
+        <paper-input name="present" type="number" min="1" required="true" preventInvalidInput="true" autoValidate="true" label="Present ID"></paper-input>
+        <div class="buttons">
+          <paper-button raised on-click="submitForm">Add</paper-button>
+        </div>
+      </form>
+    </section>
+
+    <section class="players">
+        <iron-ajax url="/players" last-response="{{players}}" auto></iron-ajax>
+        <template is="dom-repeat" id="player-list" items="{{players}}">
+            <div><span>{{item.player}}</span> - <span>( {{item.present}} )</span> <a href="#players" on-click="deletePlayer">[ x ]</a></div>
+        </template>
+    </section>
   </template>
 
   <script>
     // element registration
     Polymer({
-        is: "view-players"
+        is: "view-players",
+        properties: {
+            players: {
+                type: Array,
+                value: function() { return []; },
+                notify: true
+            }
+        },
+        attached: function() {
+            var self = this;
+            var form = document.getElementById('form');
+            form.addEventListener('iron-form-response', function(ev) {
+                self.push('players', ev.detail.response.player);
+            });
+        },
+        toggleForm: function(ev) {
+            ev.preventDefault();
+
+            var el = document.querySelector('section.players-form');
+            if (el.style.display == 'none') {
+                el.style.display = 'block';
+            }
+            else {
+                el.style.display = 'none';
+            }
+        },
+        submitForm: function() {
+            var form = document.getElementById('form');
+
+            form.submit();
+        },
+        deletePlayer: function(ev) {
+            var self = this;
+
+            $.ajax({
+                url: '/players',
+                method: 'delete',
+                data: {
+                    index: ev.model.index
+                }
+            }).done(function() {
+                self.splice('players', ev.model.index, 1);
+            });
+        }
     });
   </script>
 

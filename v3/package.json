@@ -6,6 +6,7 @@
   "main": "app.js",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.14.1",
     "connect-livereload": "^0.5.4",
     "express": "^4.13.3"
   },

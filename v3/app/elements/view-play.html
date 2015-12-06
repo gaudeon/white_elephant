@@ -1,6 +1,6 @@
-<link rel="import" href="/components/polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer.html">
 
-<dom-module id="view-rules">
+<dom-module id="view-play">
 
   <template>
     <style>
@@ -12,24 +12,15 @@
         }
     </style>
 
-    <h2>Rules</h2>
+    <h2>Play!</h2>
 
-    <ol>
-        <li>All gifts should be assigned identifiers, (e.g. number on a sticky note)</li>
-        <li>Enter in all players and the gifts they brought by id.</li>
-        <li>When play is chosen, gifts are randomly assigned to the players.</li>
-        <li>After assignment is completed, choose the continue option to determine the order of play.</li>
-        <li>A players turn consists of either opening the gift they have OR swapping with a gift someone else has (wrapped or unwrapped). Players only get one chance to swap.</li>
-        <li>When all players have completed their turn the exchange is complete. Of course trading after the exchange could happen :)</li>
-        <li>Merry/Happy/etc. &lt;Insert Holiday Here&gt;</li>
-    </ol>
   </template>
 
   <script>
     window.addEventListener('WebComponentsReady', function(e) {
         // element registration
         Polymer({
-            is: "view-rules"
+            is: "view-play"
         });
     });
   </script>

@@ -9,6 +9,9 @@ gulp.task('install', function() {
 
 gulp.task('init', ['install']);
 
+gulp.task('styles:css', function() { 
+});
+
 gulp.task('default', function() {
     // Start the server at the beginning of the task
     server.run(['app.js']);
