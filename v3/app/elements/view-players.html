@@ -30,6 +30,16 @@
           margin-right: 1em;
           vertical-align: middle;
         }
+        .player-info span {
+            display: inline-block;
+            margin: 0 1em .5em 0;
+        }
+        .player-name, .player-present {
+            width: 20em;
+        }
+        .player-present {
+            width: 7em;
+        }
     </style>
 
     <h2>Players</h2>
@@ -47,8 +57,9 @@
 
     <section class="players">
         <iron-ajax url="/players" last-response="{{players}}" auto></iron-ajax>
+        <div class="player-info player-info-head"><span class="player-name">Player</span><span class="player-present">Present ID</span>
         <template is="dom-repeat" id="player-list" items="{{players}}">
-            <div><span>{{item.player}}</span> - <span>( {{item.present}} )</span> <a href="#players" on-click="deletePlayer">[ x ]</a></div>
+            <div class="player-info"><span class="player-name">{{item.player}}</span><span class="player-present">( {{item.present}} )</span><a href="#players" class="player-action"on-click="deletePlayer">[ x ]</a></div>
         </template>
     </section>
   </template>
@@ -69,6 +80,7 @@
             var form = document.getElementById('form');
             form.addEventListener('iron-form-response', function(ev) {
                 self.push('players', ev.detail.response.player);
+                $('paper-input').each(function(index) { $(this).val(''); });
             });
         },
         toggleForm: function(ev) {
