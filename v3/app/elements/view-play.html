@@ -1,4 +1,5 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="view-play">
 
@@ -10,9 +11,75 @@
         li {
             margin: 0 0 1em 0;
         }
+        .player-present-assignment, .player-game-order {
+            margin-left: 1em;
+        }
+        .player-present-assignment div {
+            margin-bottom: 1em;
+        }
+        .next-player {
+            float: left;
+            vertical-align: middle;
+            margin-right: 2em;
+        }
+        .hidden {
+            display: none;
+        }
+        .game-over {
+            color: red;
+        }
+        .player-turn {
+            padding-top: .5em;
+        }
+        .player-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: red;
+        }
+        .player-present {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: green;
+        }
     </style>
 
     <h2>Play!</h2>
+
+    <iron-ajax url="/play?force=1" last-response="{{ game }}" auto></iron-ajax>
+
+    <template is="dom-if" if="{{ checkForPlayers(game) }}">
+        <section class="no-players">
+                <span>Waiting for players...</span>
+        </section>
+    </template>
+
+    <template is="dom-if" if="{{ ! checkForPlayers(game) }}">
+
+        <template is="dom-if" if="{{ checkCurrentPlayer(game, current_player) }}">
+            <h3>1. Assign the presents!</h3>
+            <section class="player-present-assignment">
+                <template is="dom-repeat" id=player-present-assignment-list" items="{{ game.players }}">
+                    <div class="player"><span class="player-name">{{item.player}}</span> gets present <span class="player-present">( {{item.present}} )</span></div>
+                </template>
+            </section>
+
+            <h3>2. Click next to see who the next player is until play is finished.</h3>
+            <section class="player-game-order">
+                    <paper-button raised on-click="nextPlayer" class="next-player">Next</paper-button>
+                    <template is="dom-repeat" id=player-present-order-list" items="{{ game.order_of_play_by_name }}">
+                        <div class="player-turn hidden" data-index="{{ index }}">Next player to play is <span class="player-name">{{ item }}</span></div>
+                    </template>
+            </section>
+        </template>
+
+        <template is="dom-if" if="{{ ! checkCurrentPlayer(game, current_player) }}">
+            <section class="game-over">
+                <h4>Game Over!</h4>
+                <span>Merry / Happy / Etc. &lt; Your holiday here &gt;</span>
+            </section>
+        </template>
+
+    </template>
 
   </template>
 
@@ -20,7 +87,39 @@
     window.addEventListener('WebComponentsReady', function(e) {
         // element registration
         Polymer({
-            is: "view-play"
+            is: "view-play",
+            properties: {
+                game: {
+                    type: Object,
+                    value: function() { return { "players": [], "order": [] }; },
+                    notify: true
+                },
+                current_player: {
+                    type: Number,
+                    value: -1
+                }
+            },
+            checkForPlayers: function(game) {
+                return typeof(game) !== 'undefined' && typeof(game.players) !== 'undefined' && game.players.length > 0 ? false : true;
+            },
+            nextPlayer: function() {
+                var self = this;
+                var cp   = this.get('current_player') + 1;
+
+                $('.player-turn').each(function(i){
+                    if (i == cp) {
+                        $(this).removeClass('hidden');
+                    }
+                    else {
+                        $(this).addClass('hidden');
+                    }
+                });
+
+                self.set('current_player', cp);
+            },
+            checkCurrentPlayer: function(game, current_player) {
+                return current_player < game.players.length;
+            }
         });
     });
   </script>
