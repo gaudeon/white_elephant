@@ -27,9 +27,10 @@
         }
         .game-over {
             color: red;
+            font-size: 2em;
         }
         .player-turn {
-            padding-top: .5em;
+            font-size: 2em;
         }
         .player-name {
             font-weight: bold;
@@ -96,7 +97,7 @@
         <template is="dom-if" if="{{ ! checkCurrentPlayer(game, current_player) }}">
             <section class="game-over">
                 <h4>Game Over!</h4>
-                <span>Merry / Happy / Etc. &lt; Your holiday here &gt;</span>
+                <span>Merry / Happy / Etc. &lt; Insert Holiday Here &gt;</span>
             </section>
         </template>
 
