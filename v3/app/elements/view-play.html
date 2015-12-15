@@ -41,9 +41,30 @@
             font-size: 1.1em;
             color: green;
         }
+        .background-music {
+            display: block;
+            position: absolute;
+            bottom: 1em;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+        audio {
+            width: 100%;
+        }
+        .attribution {
+            font-size: .5em;
+        }
     </style>
 
     <h2>Play!</h2>
+
+    <section class="background-music">
+        <audio controls>
+            <source src="/audio/wish_background.mp3" type="audio/mpeg">
+        </audio>
+        <div class="attribution"><i>Wish Background</i> Kevin MacLeod (incompetech.com) - Licensed under Creative Commons: By Attribution 3.0</div>
+    </section>
 
     <iron-ajax url="/play?force=1" last-response="{{ game }}" auto></iron-ajax>
 
