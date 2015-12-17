@@ -1,13 +1,5 @@
 var gulp = require('gulp');
 var server = require('gulp-express');
-var install = require("gulp-install");
-
-gulp.task('install', function() {
-    return gulp.src(['./bower.json', './package.json'])
-        .pipe(install());
-});
-
-gulp.task('init', ['install']);
 
 gulp.task('styles:css', function() { 
 });
