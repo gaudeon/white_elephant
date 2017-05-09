@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import PlayPage from '../components/PlayPage';
+import PageShell from '../components/PageShell';
 
-export class PlayContainer extends React.Component {
+export class PageContainer extends React.Component {
     render() {
         return (
-            <PlayPage>
+            <PageShell>
                 { this.props.children }
-            </PlayPage>
+            </PageShell>
         );
     }
 }
@@ -26,4 +26,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(PlayContainer);
+)(PageContainer);

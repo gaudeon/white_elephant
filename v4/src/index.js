@@ -1,20 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory, IndexRoute, Link } from 'react-router';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
-import App from './App';
 
 // sass
 import './common/assets/styles/main.scss';
 
-import HomeContainer from './home/containers/HomeContainer';
+// redux reducers and store using ReduxPromise as middleware
+import reducers from './common/reducers';
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+
+// top level containers
+import PageContainer from './common/containers/PageContainer';
 
 ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path="/" component={HomeContainer}>
-    </Route>
-  </Router>,
-  document.getElementById('root')
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <Router>
+            <Route path="/" component={PageContainer} />
+        </Router>
+    </Provider>,
+    document.getElementById('root')
 );
